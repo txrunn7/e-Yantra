@@ -30,11 +30,11 @@ if __name__ == '__main__':
     #subtask 1
     if test_cases <= 10:
         t_val = 1
-        procedure(test_cases, 1)
+        procedure(test_cases, sub=1)
     #subtask 2
     if 1 <= test_cases <= 25:
         if t_val == 0:
-            procedure(test_cases, 2)
+            procedure(test_cases, sub=2)
 
     # Write your code from here
     

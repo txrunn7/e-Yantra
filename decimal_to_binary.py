@@ -29,23 +29,19 @@ if __name__ == '__main__':
         n = int(input())
         if 0<=n<=255:
          x.append(dec_to_binary(n))
-        
-        else:
-            print("Does not match the given constraint")
-
+         
      for i in x:
         print(i)
+
         
-    else:
+    elif test_case<1 and test_case>25:
         for case in range(1, test_cases + 1):
          n = int(input())
          if n<=20:
           x.append(dec_to_binary(n))
-        
-         else:
-            print("Does not match the given constraint")
-
+          
         for i in x:
-         print(i)
-        
+          print(i)
+         
 
+        

@@ -1,3 +1,5 @@
+from functools import reduce
+
 def generate_AP(a1, d, n):
 
     AP_series = []
@@ -55,9 +57,9 @@ if 1<=test_cases<=25:
              print(i,end=" ")
             print('\n')
 
-
-            sum=0
-
-            for j in squared_numbers:
-             sum+=j
+            sum= reduce(lambda x, y: x + y, numbers)
             print(sum)
+
+
+
+            

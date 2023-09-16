@@ -9,9 +9,10 @@ def pallindrome(string):
         print("It is not a palindrome")
 
 T = int(input(""))
-
+t_val = 0
 #subtask 1
 if T <= 5:
+    t_val = 1
     for i in range(T):
         string = input("")
         if len(string) <= 70:
@@ -21,9 +22,10 @@ if T <= 5:
 
 #subtask 2
 if 1 <= T <= 25:
-    for i in range(T):
-        string = input("")
-        if 2 <= len(string) <= 100:
-            pallindrome(string)
-        else:
-            break
+    if t_val == 0:
+        for i in range(T):
+            string = input("")
+            if 2 <= len(string) <= 100:
+                pallindrome(string)
+            else:
+                break

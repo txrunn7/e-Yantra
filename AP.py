@@ -40,16 +40,25 @@ if 1 <= test_cases <= 25:
             print(sum)
 
 else:
-
-    if 1 <= a <= 20 and 1 <= d <= 20 and 1 <= n <= 20:
-        ap = generate_AP(a, d, n)
+        
+        if 1<=a<=20 and 1<=d<=20 and 1<=n<=20:
+            ap=generate_AP(a,d,n)
 
         for i in ap:
             print(i, end=" ")
 
-        squared_numbers = list(map(lambda x: x**2, ap))
 
-        for i in squared_numbers:
-            print(i, end=" ")
-        sum = reduce(lambda x, y: x + y, squared_numbers)
-        print(sum)
+            squared_numbers = list(map(lambda x: x ** 2, ap))
+        
+            for i in squared_numbers:
+             print(i,end=" ")
+            print('\n')
+
+            sum= reduce(lambda x, y: x + y, squared_numbers)
+            print(sum)
+
+
+
+            
+
+          

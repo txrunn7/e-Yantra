@@ -27,35 +27,34 @@ if 1<=test_cases<=25:
 
          for i in ap:
              print(i,end=" ")
-         print()
+         #print('\n')
 
 
          squared_numbers = list(map(lambda x: x ** 2, ap))
         
          for i in squared_numbers:
              print(i,end=" ")
-         print()
+         #print('\n')
 
 
-         sum=0
-
-         for j in squared_numbers:
-            sum+=j
+         sum= reduce(lambda x, y: x + y, squared_numbers)
          print(sum)
+         
+else:
         
-        elif 1<=a<=20 and 1<=d<=20 and 1<=n<=20:
+        if 1<=a<=20 and 1<=d<=20 and 1<=n<=20:
             ap=generate_AP(a,d,n)
 
             for i in ap:
              print(i,end=" ")
-            print('\n')
+            #print('\n')
 
 
             squared_numbers = list(map(lambda x: x ** 2, ap))
         
             for i in squared_numbers:
-                print(i,end=" ")
-
+             print(i,end=" ")
+            print('\n')
 
             sum= reduce(lambda x, y: x + y, squared_numbers)
             print(sum)
@@ -63,3 +62,5 @@ if 1<=test_cases<=25:
 
 
             
+
+          

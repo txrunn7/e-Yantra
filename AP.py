@@ -57,7 +57,7 @@ if 1<=test_cases<=25:
              print(i,end=" ")
             print('\n')
 
-            sum= reduce(lambda x, y: x + y, numbers)
+            sum= reduce(lambda x, y: x + y, squared_numbers)
             print(sum)
 
 

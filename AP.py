@@ -27,14 +27,14 @@ if 1<=test_cases<=25:
 
          for i in ap:
              print(i,end=" ")
-         print('\n')
+         print()
 
 
          squared_numbers = list(map(lambda x: x ** 2, ap))
         
          for i in squared_numbers:
              print(i,end=" ")
-         print('\n')
+         print()
 
 
          sum=0
@@ -54,8 +54,8 @@ if 1<=test_cases<=25:
             squared_numbers = list(map(lambda x: x ** 2, ap))
         
             for i in squared_numbers:
-             print(i,end=" ")
-            print('\n')
+                print(i,end=" ")
+
 
             sum= reduce(lambda x, y: x + y, squared_numbers)
             print(sum)

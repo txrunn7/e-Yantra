@@ -22,10 +22,19 @@ if __name__ == '__main__':
     
     test_cases = int(input())
     x = []
+    
+    if 1<=test_cases<=25:
 
-    for case in range(1, test_cases + 1):
+     for case in range(1, test_cases + 1):
         n = int(input())
-        x.append(dec_to_binary(n))
+        if 0<=n<=255:
+         x.append(dec_to_binary(n))
+        
+        else:
+            print("Does not match the given constraint")
 
-    for i in x:
+     for i in x:
         print(i)
+        
+    else:
+        print("Does not match the given constraint")

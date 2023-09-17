@@ -1,3 +1,4 @@
+# cook your dish here
 def dec_to_binary(n):
     bin_num = None
     
@@ -34,7 +35,7 @@ if __name__ == '__main__':
         print(i)
 
         
-    elif test_cases<1 and test_cases>25:
+    elif test_cases<1 or test_cases>25:
         for case in range(1, test_cases + 1):
          n = int(input())
          if n<=20:

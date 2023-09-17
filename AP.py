@@ -42,14 +42,14 @@ if 1<=test_cases<=25:
          
 else:
         for case in range(1, test_cases + 1):
-        inp = input()
-        values = inp.split()
+         inp = input()
+         values = inp.split()
 
-        a=int(values[0])
-        d=int(values[1])
-        n=int(values[2])
+         a=int(values[0])
+         d=int(values[1])
+         n=int(values[2])
         
-        if 1<=a<=20 and 1<=d<=20 and 1<=n<=20:
+         if 1<=a<=20 and 1<=d<=20 and 1<=n<=20:
             ap=generate_AP(a,d,n)
 
             for i in ap:

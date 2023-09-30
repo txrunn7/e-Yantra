@@ -48,12 +48,6 @@ with open(file_name, "w") as file:
         file.write("Centroid #{ledno}: {ccx},{ccy}\n".format(ledno=i+1,ccx=cx,ccy=cy))
         file.write("Area #{ledno}: {la}\n".format(ledno=i+1,la=cv2.contourArea(c)))
 
-
-
-    
-   
-
-# File is automatically closed when the 'with' block is exited
 print(f"{file_name} created and written successfully.")
 cv2.imshow('Centroids',img)
 

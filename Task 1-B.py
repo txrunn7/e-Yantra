@@ -4,7 +4,7 @@ from skimage import measure
 import imutils
 from imutils import contours
 
-img=cv2.imread(r"C:\Users\shyam\Computer Vision and Image Processing\Sample Images\whitespots.jpg")
+img=cv2.imread(r"C:\Users\shyam\Computer Vision and Image Processing\Sample Images\ledbulbs.jpg")
 imgray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 _,thresh=cv2.threshold(imgray,200,255,cv2.THRESH_BINARY)
 #contours,_=cv2.findContours(edges,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -29,9 +29,15 @@ cnts=contours.sort_contours(cnts)[0]
 
 print("Number of LEDs detected: "+str(len(cnts)))
 
-for (i, c) in enumerate(cnts):
-    M = cv2.moments(c)
-    if M["m00"] != 0:
+file_name = "leddetails.txt"
+
+with open(file_name, "w") as file:
+  
+  file.write("No. of LEDs detected:{totled}\n".format(totled=len(cnts)))
+  
+  for (i, c) in enumerate(cnts):
+     M = cv2.moments(c)
+     if M["m00"] != 0:
         cx = float(M["m10"] / M["m00"])
         cy = float(M["m01"] / M["m00"])
         cv2.circle(img, (int(cx),int(cy)), 4, (0, 255, 0), -1)
@@ -39,6 +45,16 @@ for (i, c) in enumerate(cnts):
         cv2.putText(img, str(i + 1), (int(cx) + 10, int(cy) + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0), 1)
         print(("Centroid #{ledno}: {ccx},{ccy}").format(ledno=i+1,ccx=cx,ccy=cy))
         print("Area #{ledno}: {la}".format(ledno=i+1,la=cv2.contourArea(c)))
+        file.write("Centroid #{ledno}: {ccx},{ccy}\n".format(ledno=i+1,ccx=cx,ccy=cy))
+        file.write("Area #{ledno}: {la}\n".format(ledno=i+1,la=cv2.contourArea(c)))
+
+
+
+    
+   
+
+# File is automatically closed when the 'with' block is exited
+print(f"{file_name} created and written successfully.")
 cv2.imshow('Centroids',img)
 
 cv2.waitKey(0)

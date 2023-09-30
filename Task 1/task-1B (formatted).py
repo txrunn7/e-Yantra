@@ -3,7 +3,7 @@ from imutils import contours
 from skimage import measure
 import numpy as np
 import imutils
-import cv2 as cv
+import cv2 
 
 
 # load the image, 

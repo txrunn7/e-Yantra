@@ -3,7 +3,8 @@ from imutils import contours
 from skimage import measure
 import numpy as np
 import imutils
-import cv2
+import cv2 as cv
+
 
 # load the image, 
 image = cv2.imread('led.jpg', 1)

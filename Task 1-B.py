@@ -13,7 +13,7 @@ labels=measure.label(thresh, connectivity=2,  background=0)
 mask = np.zeros(thresh.shape, dtype="uint8")
 
 for label in np.unique(labels):
-	# if this is the background label, ignore it
+	
 	if label == 0:
 		continue
 	
@@ -37,9 +37,8 @@ for (i, c) in enumerate(cnts):
         cv2.circle(img, (int(cx),int(cy)), 4, (0, 255, 0), -1)
         # cv2.putText(img, str(cx) + "," + str(cy), (cx + 10, cy + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0), 1)
         cv2.putText(img, str(i + 1), (int(cx) + 10, int(cy) + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0), 1)
-        print("Centroid #" + str(i + 1) + ": " + "(" + str(cx) + "," + str(cy) + ")")
-        print("Area #" + str(i + 1) + ": " + str(cv2.contourArea(c)))
-
+        print(("Centroid #{ledno}: {ccx},{ccy}").format(ledno=i+1,ccx=cx,ccy=cy))
+        print("Area #{ledno}: {la}".format(ledno=i+1,la=cv2.contourArea(c)))
 cv2.imshow('Centroids',img)
 
 cv2.waitKey(0)

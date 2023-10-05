@@ -3,7 +3,8 @@ from imutils import contours
 from skimage import measure
 import numpy as np
 import imutils
-import cv2
+import cv2 
+
 
 # load the image, 
 image = cv2.imread('led.jpg', 1)
@@ -50,9 +51,6 @@ cnts=contours.sort_contours(cnts)[0]
 cntrd=[]
 areas=[]
 
-#number of leds
-a=len(cnts)
-
 # Loop over the contours
 for c in cnts:
 
@@ -67,6 +65,7 @@ for c in cnts:
         cy = float(M["m01"] / M["m00"])
 
     
+
     # Draw the bright spot on the image
 
 
@@ -74,16 +73,16 @@ for c in cnts:
     areas.append(area)
     cntrd.append((cx,cy))
 
+# Save the output image as a PNG file
+cv2.imwrite("led_detection_results.png", image)
+
 # Open a text file for writing
 with open("led_detection_results.txt", "w") as file:
     # Write the number of LEDs detected to the file
     file.write(f"No. of LEDs detected: {a}\n")
-    
     # Loop over the contours
-    for (i, c) in enumerate(cnts):
-        centroid = cntrd[i]
-        area = areas[i]
-        
+    
+        # Write centroid coordinates and area for each LED to the file
         file.write(f"Centroid #{i + 1}: {centroid}\nArea #{i + 1}: {area}\n")
-
-
+# Close the text file
+file.close()

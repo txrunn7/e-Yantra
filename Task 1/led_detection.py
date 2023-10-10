@@ -10,6 +10,7 @@ image = cv2.imread('led.jpg', 1)
 
 # convert it to grayscale, and blur it
 
+
 # threshold the image to reveal light regions in the blurred image
 
 

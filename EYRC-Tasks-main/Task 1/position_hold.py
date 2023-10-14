@@ -25,6 +25,7 @@ from std_msgs.msg import Int16
 from std_msgs.msg import Int64
 from std_msgs.msg import Float64
 from pid_tune.msg import PidTune
+from waypoint_navigation import next_coordinate
 import rospy
 import time
 
@@ -40,7 +41,7 @@ class swift():
 		self.drone_position = [0.0,0.0,0.0]	
 
 		# [x_setpoint, y_setpoint, z_setpoint]
-		self.setpoint = [2,2,20] # whycon marker at the position of the dummy given in the scene. Make the whycon marker associated with position_to_hold dummy renderable and make changes accordingly
+		self.setpoint = next_coordinate # whycon marker at the position of the dummy given in the scene. Make the whycon marker associated with position_to_hold dummy renderable and make changes accordingly
 
 
 		#Declaring a cmd of message type swift_msgs and initializing values
@@ -238,3 +239,4 @@ if __name__ == '__main__':
 	while not rospy.is_shutdown():
 		swift_drone.pid()
 		r.sleep()
+

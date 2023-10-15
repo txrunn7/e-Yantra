@@ -31,8 +31,6 @@ class waypoint_coordinate_updater(swift):
         print("Current SetPoint", self.setpoint, "; Error:", self.error)
         if [1 if -0.2 < i < 0.2 else 0 for i in self.error] == [1, 1, 1]:
             self.nth_term += 1
-            print("Updated N value")
-
 
 if __name__ == '__main__':
 

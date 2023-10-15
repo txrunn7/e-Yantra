@@ -27,14 +27,13 @@ class waypoint_coordinate_updater(swift):
             [0, 0, 19]
 
         ]
-        self.run()
-
     def run(self):
-        self.setpoint = self.given_coordinates[0]
+        self.setpoint = self.given_coordinates[self.nth_term]
+        print("Current SetPoint", self.setpoint, "; Error:", self.error)
         if [1 if -0.2 < i < 0.2 else 0 for i in self.error] == [1, 1, 1]:
             self.nth_term += 1
-            self.setpoint = self.given_coordinates[self.nth_term]
-            print("Current SetPoint", self.setpoint)
+            print("Updated N value")
+
 
 if __name__ == '__main__':
 
@@ -42,4 +41,5 @@ if __name__ == '__main__':
     r = rospy.Rate(29.99) #specify rate in Hz based upon your desired PID sampling time, i.e. if desired sample time is 33ms specify rate as 30Hz
     while not rospy.is_shutdown():
         swift_drone.pid()
+        swift_drone.run()
         r.sleep()

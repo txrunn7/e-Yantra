@@ -25,7 +25,6 @@ class waypoint_coordinate_updater(swift):
             [7, -3, 21],
             [7, 0, 21],
             [0, 0, 19]
-
         ]
     def run(self):
         self.setpoint = self.given_coordinates[self.nth_term]

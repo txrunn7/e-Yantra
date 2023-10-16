@@ -26,17 +26,23 @@ class waypoint_coordinate_updater(swift):
             [7, 0, 21],
             [0, 0, 19]
         ]
-    def run(self):
-        self.setpoint = self.given_coordinates[self.nth_term]
-        print("Current SetPoint", self.setpoint, "; Error:", self.error)
+    def run(self, startTime):
+        if self.nth_term < len(self.given_coordinates):
+            self.setpoint = self.given_coordinates[self.nth_term]
+        else:
+            self.setpoint = self.given_coordinates[-1]
+        
         if [1 if -0.2 < i < 0.2 else 0 for i in self.error] == [1, 1, 1]:
             self.nth_term += 1
+            end_time = time.time()
+            print(f"{self.setpoint} reached at {end_time - startTime}")
 
 if __name__ == '__main__':
 
     swift_drone = waypoint_coordinate_updater()
-    r = rospy.Rate(29.99) #specify rate in Hz based upon your desired PID sampling time, i.e. if desired sample time is 33ms specify rate as 30Hz
+    r = rospy.Rate(29.99)
+    start_time = time.time()#specify rate in Hz based upon your desired PID sampling time, i.e. if desired sample time is 33ms specify rate as 30Hz
     while not rospy.is_shutdown():
         swift_drone.pid()
-        swift_drone.run()
+        swift_drone.run(start_time)
         r.sleep()

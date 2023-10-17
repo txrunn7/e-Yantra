@@ -11,6 +11,7 @@ import rospy
 import time
 
 
+
 class waypoint_coordinate_updater(swift):
     def __init__(self):
         super().__init__()
@@ -28,15 +29,16 @@ class waypoint_coordinate_updater(swift):
             [0, 0, 19]
 
         ]
+    
     def run(self, startTime):
-        if self.nth_term == len(self.given_coordinates)-1:
-            self.setpoint = self.given_coordinates[-1]
-        else:
-            self.setpoint = self.given_coordinates[self.nth_term]
+        self.setpoint = self.given_coordinates[self.nth_term]
         #print("Current SetPoint", self.setpoint, "; Error:", self.error)
         if [1 if -0.2 < i < 0.2 else 0 for i in self.error] == [1, 1, 1] :
             print(f"{self.setpoint} reached at {time.time() - startTime}")
-            self.nth_term += 1
+            if self.nth_term < len(self.given_coordinates)-1:
+                self.nth_term += 1
+            else:
+                self.nth_term = len(self.given_coordinates) - 1
             self.setpoint = self.given_coordinates[self.nth_term]
 
 

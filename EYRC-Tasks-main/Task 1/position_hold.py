@@ -25,7 +25,6 @@ from std_msgs.msg import Int16
 from std_msgs.msg import Int64
 from std_msgs.msg import Float64
 from pid_tune.msg import PidTune
-from waypoint_navigation import next_coordinate
 import rospy
 import time
 
@@ -35,13 +34,12 @@ class swift():
 	def __init__(self):
 		
 		rospy.init_node('drone_control')	# initializing ros node with name drone_control
-
 		# This corresponds to your current position of drone. This value must be updated each time in your whycon callback
 		# [x,y,z]
-		self.drone_position = [0.0,0.0,0.0]	
+		self.drone_position = [0.0, 0.0, 0.0]	
 
 		# [x_setpoint, y_setpoint, z_setpoint]
-		self.setpoint = next_coordinate # whycon marker at the position of the dummy given in the scene. Make the whycon marker associated with position_to_hold dummy renderable and make changes accordingly
+		self.setpoint = [0, 0, 23] # whycon marker at the position of the dummy given in the scene. Make the whycon marker associated with position_to_hold dummy renderable and make changes accordingly
 
 
 		#Declaring a cmd of message type swift_msgs and initializing values
@@ -58,9 +56,9 @@ class swift():
 
 		#initial setting of Kp, Kd and ki for [roll, pitch, throttle]. eg: self.Kp[2] corresponds to Kp value in throttle axis
 		#after tuning and computing corresponding PID parameters, change the parameters 112* 0.07,1* 0.0001,67*0.3
-		self.Kp = [90, 90*0.07, 177 * 0.07]
-		self.Ki = [250*0.0001, 1*0.0001, 60 * 0.0001]
-		self.Kd = [2400*0.7, 3, 5000 * 0.06]
+		self.Kp = [60*0.1,60*0.07,140*0.06]
+		self.Ki = [5*0.0002,0.0001,60*0.0001]
+		self.Kd = [11*0.69,10*0.3,800*0.3]
 		#------------------------------------
 		# self.Kp = [90, 90*0.07, 177 * 0.07]
 		# self.Ki = [250*0.0001, 1*0.0001, 60 * 0.0001]
@@ -197,7 +195,7 @@ class swift():
 
 		# self.prev_alt_error = self.alt_error
 		# self.alt_error_sum += self.alt_error
-		self.cmd.rcThrottle = int(1574 + self.out_throttle)
+		self.cmd.rcThrottle = int(1583 + self.out_throttle)
 		self.cmd.rcPitch = int(1500 + self.out_pitch)
 		self.cmd.rcRoll = int(1500 - self.out_roll)
 
@@ -239,4 +237,3 @@ if __name__ == '__main__':
 	while not rospy.is_shutdown():
 		swift_drone.pid()
 		r.sleep()
-

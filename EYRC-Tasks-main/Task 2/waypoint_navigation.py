@@ -29,17 +29,19 @@ class waypoint_coordinate_updater(swift):
             [0, 0, 19]
 
         ]
+        self.reaching_status = {}
+        for coordinate in self.given_coordinates:
+            self.reaching_status[f"{coordinate}"] = 0
     
     def run(self, startTime):
-        self.setpoint = self.given_coordinates[self.nth_term]
-        #print("Current SetPoint", self.setpoint, "; Error:", self.error)
-        if [1 if -0.2 < i < 0.2 else 0 for i in self.error] == [1, 1, 1] :
-            print(f"{self.setpoint} reached at {time.time() - startTime}")
-            if self.nth_term < len(self.given_coordinates)-1:
-                self.nth_term += 1
+        #print(self.setpoint, self.reaching_status[f"{self.setpoint}"])
+        if (-0.20 <= self.error[0] <= 0.2 and -0.20 <= self.error[1] <= 0.2 and-0.20 <= self.error[2] <= 0.2) and self.reaching_status.get(f"{self.setpoint}") != 1:
+            self.reaching_status[f"{self.setpoint}"] = 1
+            self.nth_term += 1
+            if self.nth_term < len(self.given_coordinates) - 1:
+                self.setpoint = self.given_coordinates[self.nth_term]
             else:
-                self.nth_term = len(self.given_coordinates) - 1
-            self.setpoint = self.given_coordinates[self.nth_term]
+                self.setpoint = self.given_coordinates[-1]
 
 
 if __name__ == '__main__':

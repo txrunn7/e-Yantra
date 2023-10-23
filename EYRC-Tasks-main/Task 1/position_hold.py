@@ -39,7 +39,7 @@ class swift():
 		self.drone_position = [0.0, 0.0, 0.0]	
 
 		# [x_setpoint, y_setpoint, z_setpoint]
-		self.setpoint = [0, 0, 23] # whycon marker at the position of the dummy given in the scene. Make the whycon marker associated with position_to_hold dummy renderable and make changes accordingly
+		#self.setpoint = [0, 0, 23] # whycon marker at the position of the dummy given in the scene. Make the whycon marker associated with position_to_hold dummy renderable and make changes accordingly
 
 
 		#Declaring a cmd of message type swift_msgs and initializing values
@@ -56,9 +56,12 @@ class swift():
 
 		#initial setting of Kp, Kd and ki for [roll, pitch, throttle]. eg: self.Kp[2] corresponds to Kp value in throttle axis
 		#after tuning and computing corresponding PID parameters, change the parameters 112* 0.07,1* 0.0001,67*0.3
-		self.Kp = [50*0.1,80*0.07,153*0.06]
-		self.Ki = [1*0.0001,0,50*0.0001]
-		self.Kd = [80*0.7,92*0.3,952*0.3]
+		# self.Kp = [50*0.1,80*0.07,153*0.06]
+		# self.Ki = [1*0.0001,0,50*0.0001]
+		# self.Kd = [80*0.7,92*0.3,952*0.3]
+		self.Kp = [80*0.1,86*0.07,110*0.07]
+		self.Ki = [1*0.0001,0,8*0.0001]
+		self.Kd = [16*0.7, 5*0.3, 410*0.3]
 		#------------------------------------
 		# self.Kp = [90, 90*0.07, 177 * 0.07]
 		# self.Ki = [250*0.0001, 1*0.0001, 60 * 0.0001]
@@ -195,7 +198,7 @@ class swift():
 
 		# self.prev_alt_error = self.alt_error
 		# self.alt_error_sum += self.alt_error
-		self.cmd.rcThrottle = int(1583 + self.out_throttle)
+		self.cmd.rcThrottle = int(1585 + self.out_throttle)
 		self.cmd.rcPitch = int(1500 + self.out_pitch)
 		self.cmd.rcRoll = int(1500 - self.out_roll)
 
@@ -217,9 +220,13 @@ class swift():
 		if self.cmd.rcRoll < self.min_values[0]:
 			self.cmd.rcRoll = self.min_values[0]
 
-		for i in range(3):
-			self.prev_error[i] = self.error[i]
-			self.error_sum[i] = self.error_sum[i] + self.error[i]
+		self.prev_error[0] = self.error[0]
+		self.prev_error[1] = self.error[1]
+		self.prev_error[2] = self.error[2]
+
+		self.error_sum[0] = self.error_sum[0] + self.error[0]
+		self.error_sum[1] = self.error_sum[1] + self.error[1]
+		self.error_sum[2] = self.error_sum[2] + self.error[2]
 
 	#------------------------------------------------------------------------------------------------------------------------
 		self.command_pub.publish(self.cmd)

@@ -15,7 +15,6 @@ import time
 class waypoint_coordinate_updater(swift):
     def __init__(self):
         super().__init__()
-        self.nth_term = 0
         self.given_coordinates = [
             [0, 0, 23],
             [2, 0, 23],
@@ -29,16 +28,19 @@ class waypoint_coordinate_updater(swift):
             [0, 0, 19]
 
         ]
+        self.setpoint = [0,0,23]
+        self.Kp = [93*0.1,91*0.07,115*0.07]
+        self.Ki = [6*0.0001,6*0.0001,8*0.0001]
+        self.Kd = [12*0.7, 4*0.3, 590*0.3]
     def run(self):
+        print(self.drone_position)
         if -0.20 <= self.error[0] <= 0.20 and -0.20 <= self.error[1] <= 0.20 and -0.20 <= self.error[2] <= 0.20:
-            if len(self.given_coordinates) != 0:
-                self.setpoint = self.given_coordinates[0]
-            else:
-                print("Drone Reached Destination!!")
-
             if self.setpoint != [0,0,19]:
                 self.given_coordinates.remove(self.setpoint)
-            
+                self.setpoint = self.given_coordinates[0]
+                print("-"*70)
+            else:
+                self.setpoint = [0,0,19]
 
 
 if __name__ == '__main__':
